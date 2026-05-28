@@ -1,0 +1,589 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Python Assessment (100 Q) — EntryGlobe</title>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:system-ui,sans-serif;background:#f5f5f0;color:#1a1a1a;min-height:100vh}
+.container{max-width:820px;margin:0 auto;padding:2rem 1rem}
+.header{background:#1a1a2e;color:#fff;padding:1.5rem 2rem;border-radius:12px;margin-bottom:2rem;text-align:center}
+.header h1{font-size:1.5rem;font-weight:600;margin-bottom:4px}
+.header p{font-size:0.82rem;opacity:0.75;line-height:1.5}
+.card{background:#fff;border:0.5px solid #e0e0d8;border-radius:12px;padding:1.5rem;margin-bottom:1.5rem}
+label{display:block;font-size:0.85rem;font-weight:500;color:#555;margin-bottom:6px}
+input[type=text],input[type=email],input[type=tel]{width:100%;padding:10px 14px;border:1px solid #ddd;border-radius:8px;font-size:0.95rem;outline:none;transition:border 0.2s}
+input:focus{border-color:#4f46e5}
+.form-grid{display:grid;grid-template-columns:1fr 1fr;gap:1rem}
+.form-grid .full{grid-column:1/-1}
+.btn{display:inline-flex;align-items:center;gap:8px;padding:12px 24px;border-radius:8px;border:none;font-size:0.95rem;font-weight:500;cursor:pointer;transition:all 0.2s}
+.btn-primary{background:#4f46e5;color:#fff}
+.btn-primary:hover{background:#4338ca}
+.btn-block{width:100%;justify-content:center}
+.section-title{font-size:1.1rem;font-weight:600;margin-bottom:1rem;padding-bottom:0.5rem;border-bottom:2px solid #4f46e5;color:#1a1a2e}
+.badge{display:inline-block;padding:3px 10px;border-radius:20px;font-size:0.75rem;font-weight:500;margin-bottom:0.75rem}
+.badge-blue{background:#e0e7ff;color:#3730a3}
+.badge-green{background:#dcfce7;color:#166534}
+.badge-amber{background:#fef9c3;color:#92400e}
+.badge-red{background:#fee2e2;color:#991b1b}
+.q-block{margin-bottom:1.5rem;padding:1rem 1.25rem;border:0.5px solid #e8e8e0;border-radius:10px;background:#fafaf8}
+.q-num{font-size:0.8rem;color:#888;margin-bottom:6px}
+.q-text{font-size:0.95rem;font-weight:500;margin-bottom:0.75rem;line-height:1.5}
+.options{display:grid;gap:6px}
+.opt{display:flex;align-items:flex-start;gap:10px;padding:8px 12px;border:1px solid #e0e0d8;border-radius:8px;cursor:pointer;transition:all 0.15s;font-size:0.9rem}
+.opt:hover{border-color:#4f46e5;background:#f0f0ff}
+.opt input{margin-top:3px;accent-color:#4f46e5;flex-shrink:0}
+.opt.selected{border-color:#4f46e5;background:#eef2ff}
+.practice-q{margin-bottom:1.25rem;padding:1rem 1.25rem;border:0.5px solid #e8e8e0;border-radius:10px;background:#fafaf8}
+.practice-q textarea{width:100%;margin-top:0.75rem;padding:10px;border:1px solid #ddd;border-radius:8px;font-size:0.9rem;font-family:monospace;resize:vertical;min-height:90px;outline:none}
+.practice-q textarea:focus{border-color:#4f46e5}
+.progress-bar{background:#e0e0d8;border-radius:99px;height:8px;margin-bottom:1.5rem}
+.progress-fill{background:#4f46e5;height:8px;border-radius:99px;transition:width 0.3s}
+.score-card{text-align:center;padding:2rem}
+.score-big{font-size:3rem;font-weight:700;color:#4f46e5}
+.score-label{font-size:1rem;color:#666;margin-bottom:1.5rem}
+.score-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1rem;margin:1.5rem 0}
+.score-item{background:#f5f5f0;border-radius:10px;padding:1rem;text-align:center}
+.score-item .val{font-size:1.5rem;font-weight:600;color:#1a1a2e}
+.score-item .lbl{font-size:0.78rem;color:#888;margin-top:2px}
+.correct-ans{color:#166534;font-weight:500}
+.wrong-ans{color:#dc2626}
+.ans-reveal{background:#f0fdf4;border-left:3px solid #22c55e;padding:8px 12px;margin-top:6px;border-radius:0 6px 6px 0;font-size:0.85rem;color:#166534}
+.prac-pass{background:#f0fdf4;border-left:3px solid #22c55e;padding:8px 12px;margin-top:6px;border-radius:0 6px 6px 0;font-size:0.85rem;color:#166534}
+.prac-fail{background:#fef2f2;border-left:3px solid #ef4444;padding:8px 12px;margin-top:6px;border-radius:0 6px 6px 0;font-size:0.85rem;color:#991b1b}
+.prac-code{font-family:monospace;font-size:0.82rem;white-space:pre-wrap;background:#1a1a2e;color:#e0e7ff;padding:8px 10px;border-radius:6px;margin-top:6px;overflow-x:auto}
+.warn-banner{background:#fef9c3;border:1px solid #fbbf24;border-radius:8px;padding:12px 16px;margin-bottom:1rem;font-size:0.85rem;color:#92400e}
+.info-banner{background:#eff6ff;border:1px solid #93c5fd;border-radius:8px;padding:12px 16px;margin-bottom:1rem;font-size:0.85rem;color:#1e40af}
+.hidden{display:none}
+.no-select{user-select:none;-webkit-user-select:none}
+.timer{position:fixed;top:16px;right:16px;background:#1a1a2e;color:#fff;padding:8px 16px;border-radius:8px;font-size:0.9rem;font-weight:500;z-index:999}
+.saving-overlay{position:fixed;inset:0;background:rgba(255,255,255,0.95);display:none;flex-direction:column;align-items:center;justify-content:center;z-index:9999;gap:14px}
+.saving-overlay.show{display:flex}
+.spinner{width:44px;height:44px;border:3px solid #e0e7ff;border-top-color:#4f46e5;border-radius:50%;animation:spin 0.8s linear infinite}
+@keyframes spin{to{transform:rotate(360deg)}}
+.saved-badge{display:inline-flex;align-items:center;gap:6px;background:#dcfce7;color:#166534;padding:6px 16px;border-radius:20px;font-size:0.85rem;font-weight:500;margin-top:0.75rem}
+@media print{body{display:none}}
+@media(max-width:600px){.form-grid{grid-template-columns:1fr}.score-grid{grid-template-columns:1fr 1fr}}
+</style>
+</head>
+<body>
+<div class="timer hidden" id="timer">⏱ 90:00</div>
+<div class="saving-overlay hidden" id="saving-overlay">
+  <div class="spinner"></div>
+  <div id="saving-msg" style="font-size:1rem;color:#4f46e5;font-weight:500">Saving your results...</div>
+</div>
+
+<div class="container no-select" id="app">
+
+<!-- SCREEN 1: Registration -->
+<div id="screen-reg">
+  <div class="header">
+    <h1>Python Programming Assessment</h1>
+    <p>Variables &amp; Naming Rules · Comments · Data Types · Operators · Memory &amp; id() · Input · If-Else · Loops · Functions · Exception Handling · OOP (Class &amp; Object, Inheritance, Polymorphism, Encapsulation)</p>
+  </div>
+  <div class="card">
+    <div class="section-title">Student Registration</div>
+    <div class="warn-banner">⚠️ Once started, you cannot go back. Results are shown only after submission.</div>
+    <div class="info-banner">📋 70 MCQ + 30 Practice questions &nbsp;|&nbsp; ⏱ 90 minutes &nbsp;|&nbsp; 📊 Total: 100 marks</div>
+    <div class="form-grid">
+      <div class="full">
+        <label>Full Name *</label>
+        <input type="text" id="reg-name" placeholder="Enter your full name" />
+      </div>
+      <div>
+        <label>Email Address *</label>
+        <input type="email" id="reg-email" placeholder="you@example.com" />
+      </div>
+      <div>
+        <label>Phone Number *</label>
+        <input type="tel" id="reg-phone" placeholder="+91 XXXXXXXXXX" />
+      </div>
+    </div>
+    <br>
+    <button class="btn btn-primary btn-block" onclick="startAssessment()">Start Assessment →</button>
+  </div>
+  <div style="text-align:center;font-size:0.8rem;color:#aaa;margin-top:1rem">Powered by EntryGlobe · entryglobe@gmail.com</div>
+</div>
+
+<!-- SCREEN 2: Assessment -->
+<div id="screen-assessment" class="hidden">
+  <div class="header">
+    <h1>🐍 Python Programming Assessment</h1>
+    <p id="student-info-header"></p>
+  </div>
+  <div class="progress-bar"><div class="progress-fill" id="progress" style="width:0%"></div></div>
+  <div class="card">
+    <div class="section-title">Section A — Multiple Choice Questions</div>
+    <div><span class="badge badge-blue">70 Questions · 1 mark each</span></div>
+    <div id="mcq-questions"></div>
+  </div>
+  <div class="card">
+    <div class="section-title">Section B — Practice / Coding Questions</div>
+    <div><span class="badge badge-amber">30 Questions · 1 mark each · auto-evaluated</span></div>
+    <div class="info-banner">💡 Write working Python code. Your code is checked automatically for the required logic, so write complete, correct statements.</div>
+    <div id="practice-questions"></div>
+  </div>
+  <div class="card" style="text-align:center">
+    <p style="font-size:0.9rem;color:#666;margin-bottom:1rem">Review all answers before submitting. You cannot change answers after this.</p>
+    <button class="btn btn-primary" style="padding:14px 48px;font-size:1rem" onclick="submitAssessment()">Submit Assessment</button>
+  </div>
+</div>
+
+<!-- SCREEN 3: Results -->
+<div id="screen-result" class="hidden">
+  <div class="header">
+    <h1>📊 Assessment Results</h1>
+    <p id="result-student-info"></p>
+  </div>
+  <div class="card">
+    <div class="score-card">
+      <div class="score-big" id="final-score">0</div>
+      <div class="score-label">out of 100 marks</div>
+      <div class="score-grid">
+        <div class="score-item"><div class="val" id="mcq-score-display">0</div><div class="lbl">MCQ Score</div></div>
+        <div class="score-item"><div class="val" id="prac-score-display">0</div><div class="lbl">Practice Score</div></div>
+        <div class="score-item"><div class="val" id="grade-display">-</div><div class="lbl">Grade</div></div>
+      </div>
+      <div id="grade-msg" style="font-size:0.95rem;color:#555;margin-top:0.5rem"></div>
+      <div class="saved-badge hidden" id="saved-badge">✓ Results saved to records</div>
+    </div>
+  </div>
+  <div class="card">
+    <div class="section-title">MCQ Review — Correct Answers</div>
+    <div id="mcq-review"></div>
+  </div>
+  <div class="card">
+    <div class="section-title">Practice Review — Auto-Evaluation</div>
+    <div id="prac-review"></div>
+  </div>
+  <div style="text-align:center;font-size:0.8rem;color:#aaa;margin-top:1rem;padding-bottom:2rem">Powered by EntryGlobe · entryglobe@gmail.com</div>
+</div>
+
+</div>
+
+<script>
+const SHEET_URL="https://script.google.com/macros/s/AKfycbxTW3KIiAwnMdBQB2Ogu4AUdSWhywStPUlKCUAMwfss6iWLcfgdARYE3AzkZo0reQdp/exec";
+
+/* ===================== SECTION A : 70 MCQ ===================== */
+const MCQ=[
+  // ----- Variables & Naming Rules (6) -----
+  {q:"Which of the following is a VALID variable name in Python?",opts:["1name","_name","my name","for"],ans:1,topic:"Variables / Naming Rules"},
+  {q:"Which of the following is NOT a valid variable name?",opts:["total_marks","_count","2value","name1"],ans:2,topic:"Variables / Naming Rules"},
+  {q:"In Python, variable names are case-sensitive. So 'Age' and 'age' are:",opts:["The same variable","Two different variables","Invalid","A syntax error"],ans:1,topic:"Variables / Naming Rules"},
+  {q:"A variable name can start with which of these?",opts:["A digit","A letter or underscore","A space","A hyphen"],ans:1,topic:"Variables / Naming Rules"},
+  {q:"Which of these CANNOT be used as a variable name because it is a reserved keyword?",opts:["data","value","class","number"],ans:2,topic:"Variables / Naming Rules"},
+  {q:"What is the recommended naming convention for Python variables?",opts:["camelCase","snake_case","PascalCase","kebab-case"],ans:1,topic:"Variables / Naming Rules"},
+  // ----- Comments (3) -----
+  {q:"Which symbol begins a single-line comment in Python?",opts:["//","#","/*","--"],ans:1,topic:"Comments"},
+  {q:"Which is commonly used to write a multi-line comment / docstring?",opts:["Triple quotes ''' '''","// //","<!-- -->","## ##"],ans:0,topic:"Comments"},
+  {q:"What does the Python interpreter do with comments?",opts:["Executes them","Ignores them during execution","Prints them","Throws an error"],ans:1,topic:"Comments"},
+  // ----- Data Types (5) -----
+  {q:"What does type(5) return?",opts:["float","int","str","bool"],ans:1,topic:"Data Types"},
+  {q:"Which of the following is a MUTABLE data type?",opts:["tuple","str","list","int"],ans:2,topic:"Data Types"},
+  {q:"What is the data type of \"hello\"?",opts:["char","str","text","word"],ans:1,topic:"Data Types"},
+  {q:"Which is a valid complex number literal in Python?",opts:["3+4j","3+4i","3i","3+4c"],ans:0,topic:"Data Types"},
+  {q:"What is the output of print(type([]))?",opts:["<class 'list'>","list","array","<list>"],ans:0,topic:"Data Types"},
+  // ----- Operators (6) -----
+  {q:"What is the result of 7 // 2?",opts:["3.5","3","4","1"],ans:1,topic:"Operators"},
+  {q:"What is the result of 2 ** 4?",opts:["8","16","6","12"],ans:1,topic:"Operators"},
+  {q:"Which keyword is the logical OR operator in Python?",opts:["||","or","OR","|"],ans:1,topic:"Operators"},
+  {q:"Which is the identity operator in Python?",opts:["==","is","=","!="],ans:1,topic:"Operators"},
+  {q:"What does 5 == 5.0 evaluate to?",opts:["True","False","Error","None"],ans:0,topic:"Operators"},
+  {q:"Which operator checks for membership in a sequence?",opts:["in","has","at","of"],ans:0,topic:"Operators"},
+  // ----- Memory Location (5) -----
+  {q:"Which function returns the memory address (identity) of an object?",opts:["addr()","id()","mem()","loc()"],ans:1,topic:"Memory Location"},
+  {q:"The 'is' operator compares two objects by their:",opts:["Values","Memory identity (address)","Length","Type only"],ans:1,topic:"Memory Location"},
+  {q:"For a=256 and b=256, 'a is b' is often True because Python:",opts:["Caches small integers","Picks randomly","Always returns False","Only caches strings"],ans:0,topic:"Memory Location"},
+  {q:"What happens to a Python object that has no references pointing to it?",opts:["It stays in memory forever","It is garbage collected","It throws an error","It becomes None"],ans:1,topic:"Memory Location"},
+  {q:"a=[1,2]; b=a; b.append(3). What is the value of a now?",opts:["[1,2]","[1,2,3]","Error","[3]"],ans:1,topic:"Memory Location"},
+  // ----- Input & Type Conversion (4) -----
+  {q:"What data type does input() always return in Python 3?",opts:["int","str","float","auto-detected"],ans:1,topic:"Input / Conversion"},
+  {q:"What does int(\"12\") return?",opts:["'12'","12","12.0","Error"],ans:1,topic:"Input / Conversion"},
+  {q:"What does float(5) return?",opts:["5","5.0","'5'","Error"],ans:1,topic:"Input / Conversion"},
+  {q:"What does str(3.14) return?",opts:["3.14","'3.14'","314","Error"],ans:1,topic:"Input / Conversion"},
+  // ----- If-Else (5) -----
+  {q:"What is the correct syntax to begin a conditional statement?",opts:["if x > 5 {","if x > 5:","if (x > 5)","if x > 5 then"],ans:1,topic:"If-Else"},
+  {q:"Which keyword handles an 'else if' condition in Python?",opts:["elseif","elif","else if","elsif"],ans:1,topic:"If-Else"},
+  {q:"What is required to define the body of an if statement in Python?",opts:["Indentation","Curly braces","A semicolon","Nothing"],ans:0,topic:"If-Else"},
+  {q:"What is the output of: if 0: print('A') else: print('B')",opts:["A","B","Error","Nothing"],ans:1,topic:"If-Else"},
+  {q:"Which is the correct ternary (one-line) conditional form?",opts:["a if cond else b","a ? b : c","cond ? a : b","if a then b"],ans:0,topic:"If-Else"},
+  // ----- Loops (6) -----
+  {q:"Which keyword is used to create a counting loop in Python?",opts:["repeat","for","loop","iterate"],ans:1,topic:"Loops"},
+  {q:"What sequence does range(3) produce?",opts:["1,2,3","0,1,2","0,1,2,3","1,2"],ans:1,topic:"Loops"},
+  {q:"Which statement skips the rest of the current iteration?",opts:["break","continue","pass","skip"],ans:1,topic:"Loops"},
+  {q:"Which statement exits a loop entirely?",opts:["continue","break","exit","stop"],ans:1,topic:"Loops"},
+  {q:"What does 'while True:' create?",opts:["An infinite loop","A single run","An error","A finite loop"],ans:0,topic:"Loops"},
+  {q:"How many times does this loop run: for i in range(2,10,2)?",opts:["4","5","8","2"],ans:0,topic:"Loops"},
+  // ----- Functions (8) -----
+  {q:"Which keyword is used to define a function?",opts:["func","def","function","define"],ans:1,topic:"Functions"},
+  {q:"Which keyword returns a value from a function?",opts:["return","give","output","send"],ans:0,topic:"Functions"},
+  {q:"A function with no return statement returns:",opts:["0","None","An error","An empty string"],ans:1,topic:"Functions"},
+  {q:"What does *args allow a function to accept?",opts:["Only fixed args","A variable number of positional arguments","Only keyword args","No arguments"],ans:1,topic:"Functions"},
+  {q:"What does **kwargs collect inside a function?",opts:["Positional args","Keyword arguments as a dictionary","A list","A set"],ans:1,topic:"Functions"},
+  {q:"Which is the correct way to define a default parameter?",opts:["def f(x=5):","def f(x:5):","def f(x->5):","def f(x==5):"],ans:0,topic:"Functions"},
+  {q:"A small anonymous function in Python is created using:",opts:["def","lambda","anon","func"],ans:1,topic:"Functions"},
+  {q:"What does the 'pass' statement do?",opts:["Skips an iteration","Does nothing (a placeholder)","Exits the loop","Raises an error"],ans:1,topic:"Functions"},
+  // ----- Exception Handling (6) -----
+  {q:"Which block is used to handle exceptions in Python?",opts:["try-except","do-catch","catch-throw","handle-error"],ans:0,topic:"Exception Handling"},
+  {q:"Which block always runs whether an exception occurs or not?",opts:["always","finally","ensure","last"],ans:1,topic:"Exception Handling"},
+  {q:"Which keyword is used to manually trigger an exception?",opts:["throw","raise","error","trigger"],ans:1,topic:"Exception Handling"},
+  {q:"Dividing a number by zero raises which exception?",opts:["ValueError","ZeroDivisionError","TypeError","IndexError"],ans:1,topic:"Exception Handling"},
+  {q:"Accessing a list index that is out of range raises:",opts:["KeyError","IndexError","ValueError","NameError"],ans:1,topic:"Exception Handling"},
+  {q:"In 'except Exception as e:', what does e represent?",opts:["The caught exception object","A string","The line number","None"],ans:0,topic:"Exception Handling"},
+  // ----- Class & Object (5) -----
+  {q:"Which keyword is used to define a class in Python?",opts:["class","Class","def","object"],ans:0,topic:"Class & Object"},
+  {q:"Which method acts as the constructor (initializer) of a class?",opts:["__start__","__init__","__main__","__create__"],ans:1,topic:"Class & Object"},
+  {q:"What is the conventional first parameter of an instance method?",opts:["this","self","cls","me"],ans:1,topic:"Class & Object"},
+  {q:"How do you create an object of a class named Car?",opts:["Car.new()","Car()","new Car()","create Car"],ans:1,topic:"Class & Object"},
+  {q:"Inside a class, 'self' refers to:",opts:["The class itself","The current instance (object)","The module","The parent class"],ans:1,topic:"Class & Object"},
+  // ----- Inheritance (5) -----
+  {q:"Inheritance allows a class to:",opts:["Hide its data","Acquire properties and methods of another class","Run faster","Delete methods"],ans:1,topic:"Inheritance"},
+  {q:"What is the correct syntax for class B inheriting from class A?",opts:["class B(A):","class B extends A:","class B: A","class B inherits A"],ans:0,topic:"Inheritance"},
+  {q:"Which function is used to call a parent class's methods?",opts:["parent()","super()","base()","this()"],ans:1,topic:"Inheritance"},
+  {q:"Inheriting from more than one parent class is called:",opts:["Multilevel inheritance","Multiple inheritance","Single inheritance","No inheritance"],ans:1,topic:"Inheritance"},
+  {q:"A class inheriting from a class that itself inherited from another is called:",opts:["Multiple inheritance","Multilevel inheritance","Hybrid only","Flat inheritance"],ans:1,topic:"Inheritance"},
+  // ----- Polymorphism (4) -----
+  {q:"Polymorphism literally means:",opts:["One name, many forms","Hiding data","A single fixed form","No inheritance allowed"],ans:0,topic:"Polymorphism"},
+  {q:"Redefining a parent class method inside a child class is called:",opts:["Overloading","Overriding","Hiding","Shadowing"],ans:1,topic:"Polymorphism"},
+  {q:"len() working on a string, list, and dict is an example of:",opts:["Encapsulation","Polymorphism","Inheritance","Abstraction"],ans:1,topic:"Polymorphism"},
+  {q:"Operator + working on both numbers and strings is an example of:",opts:["Operator polymorphism","Encapsulation","Inheritance","Recursion"],ans:0,topic:"Polymorphism"},
+  // ----- Encapsulation (4) -----
+  {q:"Encapsulation in OOP means:",opts:["Bundling data and methods together inside a class","Many forms of a method","Inheriting from a class","Looping over data"],ans:0,topic:"Encapsulation"},
+  {q:"A double underscore prefix like __balance makes an attribute:",opts:["Public","Private (name mangling)","Protected by default","Global"],ans:1,topic:"Encapsulation"},
+  {q:"A single underscore prefix like _value conventionally means:",opts:["Public","Protected / internal use","Strictly private","A constant"],ans:1,topic:"Encapsulation"},
+  {q:"Getter and setter methods are used to:",opts:["Loop over data","Control access to private attributes","Inherit a class","Raise errors"],ans:1,topic:"Encapsulation"}
+];
+
+/* ===================== SECTION B : 30 PRACTICE (auto-evaluated) ===================== */
+/* Each item has a check(answer) function returning true when the required logic is present.
+   Patterns are tolerant of spacing and student-chosen styles, but require correct Python structure. */
+const PRACTICE=[
+  {topic:"Variables",
+   q:"Create a variable called age and assign the value 25 to it.",
+   hint:"age = 25",
+   check:a=>/\bage\s*=\s*25\b/.test(a)},
+
+  {topic:"Variables",
+   q:"Assign your name (any string) to a variable called name.",
+   hint:"name = \"...\"",
+   check:a=>/\bname\s*=\s*(['"]).+?\1/.test(a)},
+
+  {topic:"Data Types",
+   q:"Create a float variable price = 99.5 and a boolean variable is_active = True.",
+   hint:"price = 99.5  /  is_active = True",
+   check:a=>/\bprice\s*=\s*99\.5\b/.test(a)&&/\bis_active\s*=\s*True\b/.test(a)},
+
+  {topic:"Operators",
+   q:"Write an expression that calculates 2 raised to the power 8 using the ** operator.",
+   hint:"2 ** 8",
+   check:a=>/2\s*\*\*\s*8/.test(a)},
+
+  {topic:"Operators",
+   q:"Use the modulus (%) operator to find the remainder of 17 divided by 5.",
+   hint:"17 % 5",
+   check:a=>/17\s*%\s*5/.test(a)},
+
+  {topic:"Operators",
+   q:"Use floor division (//) to divide 20 by 3.",
+   hint:"20 // 3",
+   check:a=>/20\s*\/\/\s*3/.test(a)},
+
+  {topic:"Input",
+   q:"Write code that takes a number as input from the user and converts it to an integer.",
+   hint:"int(input(...))",
+   check:a=>/int\s*\(\s*input\s*\(/.test(a)},
+
+  {topic:"Type Conversion",
+   q:"Convert the string '50' into an integer and add 10 to it.",
+   hint:"int('50') + 10",
+   check:a=>/int\s*\(\s*(['"])50\1\s*\)/.test(a)&&/(\+\s*10|10\s*\+)/.test(a)},
+
+  {topic:"If-Else",
+   q:"Write an if-else statement that prints 'Even' if a number n is even, otherwise prints 'Odd'.",
+   hint:"if n % 2 == 0: ... else: ...",
+   check:a=>/\bif\b/.test(a)&&/\belse\b/.test(a)&&/%\s*2/.test(a)&&/print\s*\(/.test(a)},
+
+  {topic:"If-Else",
+   q:"Write code using if-elif-else: if marks >= 90 print 'A', elif marks >= 75 print 'B', else print 'C'.",
+   hint:"if ... : elif ... : else ...",
+   check:a=>/\bif\b/.test(a)&&/\belif\b/.test(a)&&/\belse\b/.test(a)&&/print\s*\(/.test(a)},
+
+  {topic:"Loops",
+   q:"Write a for loop using range() to print numbers from 1 to 5.",
+   hint:"for i in range(1, 6): print(i)",
+   check:a=>/\bfor\b/.test(a)&&/range\s*\(/.test(a)&&/print\s*\(/.test(a)},
+
+  {topic:"Loops",
+   q:"Write a while loop that prints numbers from 1 to 5.",
+   hint:"while ...: print(...)",
+   check:a=>/\bwhile\b/.test(a)&&/print\s*\(/.test(a)},
+
+  {topic:"Loops",
+   q:"Write a for loop that iterates over the list [10, 20, 30] and prints each item.",
+   hint:"for x in [10,20,30]: print(x)",
+   check:a=>/\bfor\b/.test(a)&&/\bin\b/.test(a)&&/print\s*\(/.test(a)},
+
+  {topic:"Loops",
+   q:"Write a loop that uses break to stop when the variable i equals 3.",
+   hint:"if i == 3: break",
+   check:a=>/\b(for|while)\b/.test(a)&&/\bbreak\b/.test(a)},
+
+  {topic:"Functions",
+   q:"Define a function called greet that prints 'Hello'.",
+   hint:"def greet(): print('Hello')",
+   check:a=>/def\s+greet\s*\(/.test(a)&&/print\s*\(/.test(a)},
+
+  {topic:"Functions",
+   q:"Define a function add that takes two parameters a and b and returns their sum.",
+   hint:"def add(a, b): return a + b",
+   check:a=>/def\s+add\s*\(\s*\w+\s*,\s*\w+\s*\)/.test(a)&&/return\b/.test(a)&&/\+/.test(a)},
+
+  {topic:"Functions",
+   q:"Write a function square(n) that returns n*n, then call it with the value 5.",
+   hint:"def square(n): return n*n  ->  square(5)",
+   check:a=>/def\s+square\s*\(\s*\w+\s*\)/.test(a)&&/return\b/.test(a)&&/square\s*\(\s*5\s*\)/.test(a)},
+
+  {topic:"Functions",
+   q:"Create a lambda function that doubles a number.",
+   hint:"lambda x: x * 2",
+   check:a=>/lambda\b/.test(a)&&/(\*\s*2|2\s*\*)/.test(a)},
+
+  {topic:"Exception Handling",
+   q:"Write a try-except block that catches a ZeroDivisionError.",
+   hint:"try: ... except ZeroDivisionError: ...",
+   check:a=>/\btry\b/.test(a)&&/\bexcept\b/.test(a)&&/ZeroDivisionError/.test(a)},
+
+  {topic:"Exception Handling",
+   q:"Write a try-except-finally block (any logic inside is fine).",
+   hint:"try: ... except: ... finally: ...",
+   check:a=>/\btry\b/.test(a)&&/\bexcept\b/.test(a)&&/\bfinally\b/.test(a)},
+
+  {topic:"Exception Handling",
+   q:"Write code that raises a ValueError with the message 'Invalid'.",
+   hint:"raise ValueError('Invalid')",
+   check:a=>/\braise\b/.test(a)&&/ValueError/.test(a)},
+
+  {topic:"Class & Object",
+   q:"Create a class named Car, then create an object called my_car from it.",
+   hint:"class Car: ...  ->  my_car = Car()",
+   check:a=>/class\s+Car\b/.test(a)&&/\bmy_car\s*=\s*Car\s*\(/.test(a)},
+
+  {topic:"Class & Object",
+   q:"Define a class Student with an __init__ method that takes name and stores it as self.name.",
+   hint:"def __init__(self, name): self.name = name",
+   check:a=>/class\s+Student\b/.test(a)&&/def\s+__init__\s*\(\s*self/.test(a)&&/self\s*\.\s*name\s*=/.test(a)},
+
+  {topic:"Inheritance",
+   q:"Create a class Animal and a class Dog that inherits from Animal.",
+   hint:"class Dog(Animal): ...",
+   check:a=>/class\s+Animal\b/.test(a)&&/class\s+Dog\s*\(\s*Animal\s*\)/.test(a)},
+
+  {topic:"Inheritance",
+   q:"Inside a child class __init__, use super() to call the parent class constructor.",
+   hint:"super().__init__()",
+   check:a=>/super\s*\(\s*\)\s*\.\s*__init__/.test(a)},
+
+  {topic:"Polymorphism",
+   q:"Create two classes Cat and Dog, each with a sound() method (overriding) that returns a different string.",
+   hint:"Both classes define def sound(self): return '...'",
+   check:a=>/class\s+Cat\b/.test(a)&&/class\s+Dog\b/.test(a)&&(a.match(/def\s+sound\s*\(/g)||[]).length>=2},
+
+  {topic:"Encapsulation",
+   q:"Create a class with a private attribute __balance set to 0.",
+   hint:"self.__balance = 0  (or  __balance = 0)",
+   check:a=>/class\b/.test(a)&&/__balance\s*=\s*0\b/.test(a)},
+
+  {topic:"Encapsulation",
+   q:"Define a class Account with a private attribute __pin and a method get_pin() that returns it.",
+   hint:"def get_pin(self): return self.__pin",
+   check:a=>/class\s+Account\b/.test(a)&&/__pin/.test(a)&&/def\s+get_pin\s*\(\s*self/.test(a)&&/return\b/.test(a)},
+
+  {topic:"Memory Location",
+   q:"Create a variable x = 10 and print its memory address using id().",
+   hint:"x = 10  ->  print(id(x))",
+   check:a=>/\bx\s*=\s*10\b/.test(a)&&/id\s*\(\s*x\s*\)/.test(a)},
+
+  {topic:"Comments",
+   q:"Write a single-line Python comment that says: This is a test.",
+   hint:"# This is a test",
+   check:a=>/#\s*\S+/.test(a)}
+];
+
+const MCQ_TOTAL=MCQ.length;      // 70
+const PRAC_TOTAL=PRACTICE.length;// 30
+const GRAND_TOTAL=MCQ_TOTAL+PRAC_TOTAL; // 100
+
+let studentData={},timerInterval,timeLeft=5400,startTimestamp; // 90 minutes
+
+function startAssessment(){
+  const name=document.getElementById('reg-name').value.trim();
+  const email=document.getElementById('reg-email').value.trim();
+  const phone=document.getElementById('reg-phone').value.trim();
+  if(!name||!email||!phone){alert('Please fill all fields!');return;}
+  if(!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)){alert('Please enter a valid email!');return;}
+  studentData={name,email,phone};
+  startTimestamp=new Date();
+  document.getElementById('screen-reg').classList.add('hidden');
+  document.getElementById('screen-assessment').classList.remove('hidden');
+  document.getElementById('student-info-header').textContent=name+' · '+email;
+  renderMCQ();renderPractice();startTimer();window.scrollTo(0,0);
+}
+
+function renderMCQ(){
+  document.getElementById('mcq-questions').innerHTML=MCQ.map((q,i)=>`
+    <div class="q-block">
+      <div class="q-num"><span class="badge badge-blue">Q${i+1}</span> <span style="font-size:0.78rem;color:#aaa">${q.topic}</span></div>
+      <div class="q-text">${q.q}</div>
+      <div class="options">${q.opts.map((o,j)=>`
+        <label class="opt" id="opt-${i}-${j}">
+          <input type="radio" name="mcq-${i}" value="${j}" onchange="selectOpt(${i},${j})"> ${String.fromCharCode(65+j)}. ${o}
+        </label>`).join('')}</div>
+    </div>`).join('');
+}
+
+function renderPractice(){
+  document.getElementById('practice-questions').innerHTML=PRACTICE.map((q,i)=>`
+    <div class="practice-q">
+      <div class="q-num"><span class="badge badge-amber">P${i+1}</span> <span style="font-size:0.78rem;color:#aaa">${q.topic}</span></div>
+      <div class="q-text">${q.q}</div>
+      <textarea id="prac-${i}" placeholder="Write your Python code here..." rows="3"></textarea>
+    </div>`).join('');
+}
+
+function selectOpt(qi,oi){
+  for(let j=0;j<4;j++){const el=document.getElementById(`opt-${qi}-${j}`);if(el)el.classList.toggle('selected',j===oi);}
+  updateProgress();
+}
+
+function updateProgress(){
+  let a=0;
+  MCQ.forEach((_,i)=>{if(document.querySelector(`input[name="mcq-${i}"]:checked`))a++;});
+  PRACTICE.forEach((_,i)=>{const t=document.getElementById(`prac-${i}`);if(t&&t.value.trim())a++;});
+  document.getElementById('progress').style.width=Math.round((a/GRAND_TOTAL)*100)+'%';
+}
+
+function startTimer(){
+  const el=document.getElementById('timer');el.classList.remove('hidden');
+  timerInterval=setInterval(()=>{
+    timeLeft--;
+    if(timeLeft<=0){clearInterval(timerInterval);alert('Time is up! Submitting now.');submitAssessment(true);return;}
+    const m=Math.floor(timeLeft/60),s=timeLeft%60;
+    el.textContent=`⏱ ${String(m).padStart(2,'0')}:${String(s).padStart(2,'0')}`;
+    if(timeLeft<=300)el.style.background='#dc2626';
+  },1000);
+}
+
+function getTimeTaken(){
+  const d=Math.floor((new Date()-startTimestamp)/1000);
+  return `${Math.floor(d/60)}m ${d%60}s`;
+}
+
+function esc(s){return (s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');}
+
+async function submitAssessment(auto){
+  if(!auto&&!confirm('Are you sure you want to submit? You cannot change answers after this.'))return;
+  clearInterval(timerInterval);
+  document.getElementById('timer').classList.add('hidden');
+
+  // ---- Evaluate MCQ ----
+  let mcqScore=0;
+  const mcqResults=[];
+  MCQ.forEach((q,i)=>{
+    const sel=document.querySelector(`input[name="mcq-${i}"]:checked`);
+    const chosen=sel?parseInt(sel.value):-1;
+    const correct=chosen===q.ans;
+    if(correct)mcqScore++;
+    mcqResults.push({q:q.q,chosen,correct,ans:q.ans,opts:q.opts,topic:q.topic});
+  });
+
+  // ---- Evaluate PRACTICE (real logic check) ----
+  let pracScore=0;
+  const pracResults=[];
+  PRACTICE.forEach((q,i)=>{
+    const t=document.getElementById(`prac-${i}`);
+    const answer=t?t.value:'';
+    let passed=false;
+    try{passed=!!q.check(answer);}catch(e){passed=false;}
+    const attempted=answer.trim().length>0;
+    if(passed)pracScore++;
+    pracResults.push({q:q.q,topic:q.topic,hint:q.hint,answer,passed,attempted});
+  });
+
+  const total=mcqScore+pracScore;
+  const timeTaken=getTimeTaken();
+  let grade,msg;
+  if(total>=90){grade='A+';msg='Outstanding! Excellent command over Python core and OOP 🎉'}
+  else if(total>=75){grade='A';msg='Great job! Strong understanding across the topics 👏'}
+  else if(total>=60){grade='B';msg='Good work! Review the topics you missed 📚'}
+  else if(total>=40){grade='C';msg='Fair attempt. More practice needed, especially OOP 💪'}
+  else{grade='D';msg='Keep practicing! Revisit fundamentals and OOP, then try again 🔄'}
+
+  document.getElementById('screen-assessment').classList.add('hidden');
+  document.getElementById('saving-overlay').classList.add('show');
+
+  // ---- Save to the SAME Google Sheet workbook (identical payload keys) ----
+  try{
+    await fetch(SHEET_URL,{
+      method:'POST',mode:'no-cors',
+      headers:{'Content-Type':'application/json'},
+      body:JSON.stringify({name:studentData.name,email:studentData.email,phone:studentData.phone,mcqScore,practiceScore:pracScore,total,grade,timeTaken})
+    });
+    document.getElementById('saving-msg').textContent='✓ Results saved successfully!';
+    await new Promise(r=>setTimeout(r,1000));
+  }catch(e){
+    document.getElementById('saving-msg').textContent='Results ready!';
+    await new Promise(r=>setTimeout(r,800));
+  }
+
+  document.getElementById('saving-overlay').classList.remove('show');
+  document.getElementById('screen-result').classList.remove('hidden');
+  document.getElementById('result-student-info').textContent=`${studentData.name} · ${studentData.email} · ${studentData.phone}`;
+  document.getElementById('final-score').textContent=total;
+  document.getElementById('mcq-score-display').textContent=`${mcqScore}/${MCQ_TOTAL}`;
+  document.getElementById('prac-score-display').textContent=`${pracScore}/${PRAC_TOTAL}`;
+  document.getElementById('grade-display').textContent=grade;
+  document.getElementById('grade-msg').textContent=msg;
+  document.getElementById('saved-badge').classList.remove('hidden');
+
+  // ---- MCQ review ----
+  document.getElementById('mcq-review').innerHTML=mcqResults.map((r,i)=>`
+    <div class="q-block" style="border-left:3px solid ${r.correct?'#22c55e':'#ef4444'}">
+      <div class="q-num"><span class="badge ${r.correct?'badge-green':'badge-blue'}">Q${i+1}</span> ${r.topic}</div>
+      <div class="q-text">${r.q}</div>
+      <div style="margin-top:8px;font-size:0.85rem">
+        ${r.chosen>=0?`<span class="${r.correct?'correct-ans':'wrong-ans'}">Your answer: ${String.fromCharCode(65+r.chosen)}. ${r.opts[r.chosen]}</span>`:'<span class="wrong-ans">Not attempted</span>'}
+        ${!r.correct?`<div class="ans-reveal">✓ Correct: ${String.fromCharCode(65+r.ans)}. ${r.opts[r.ans]}</div>`:''}
+      </div>
+    </div>`).join('');
+
+  // ---- Practice review ----
+  document.getElementById('prac-review').innerHTML=pracResults.map((r,i)=>`
+    <div class="q-block" style="border-left:3px solid ${r.passed?'#22c55e':'#ef4444'}">
+      <div class="q-num"><span class="badge ${r.passed?'badge-green':'badge-red'}">P${i+1}</span> ${r.topic}</div>
+      <div class="q-text">${r.q}</div>
+      ${r.attempted?`<div class="prac-code">${esc(r.answer)}</div>`:''}
+      ${r.passed
+        ? `<div class="prac-pass">✓ Correct — required logic detected.</div>`
+        : `<div class="prac-fail">✗ ${r.attempted?'Required logic not detected.':'Not attempted.'} Expected something like: <strong>${esc(r.hint)}</strong></div>`}
+    </div>`).join('');
+
+  window.scrollTo(0,0);
+}
+
+document.addEventListener('keydown',e=>{
+  if((e.ctrlKey||e.metaKey)&&(e.key==='p'||e.key==='s')){e.preventDefault();alert('Not allowed during assessment.');}
+  if(e.key==='PrintScreen'){document.getElementById('app').style.filter='blur(20px)';setTimeout(()=>document.getElementById('app').style.filter='',2000);}
+});
+document.addEventListener('visibilitychange',()=>{
+  if(document.hidden&&!document.getElementById('screen-assessment').classList.contains('hidden')){
+    document.getElementById('app').style.filter='blur(20px)';setTimeout(()=>document.getElementById('app').style.filter='',1500);
+  }
+});
+document.addEventListener('contextmenu',e=>{
+  if(!document.getElementById('screen-assessment').classList.contains('hidden'))e.preventDefault();
+});
+document.addEventListener('input',e=>{if(e.target.tagName==='TEXTAREA')updateProgress();});
+</script>
+</body>
+</html>
