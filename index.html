@@ -64,7 +64,7 @@ input:focus{border-color:#4f46e5}
 </style>
 </head>
 <body>
-<div class="timer hidden" id="timer">⏱ 60:00</div>
+<div class="timer hidden" id="timer">⏱ 90:00</div>
 <div class="saving-overlay hidden" id="saving-overlay">
   <div class="spinner"></div>
   <div id="saving-msg" style="font-size:1rem;color:#4f46e5;font-weight:500">Saving your results...</div>
@@ -72,16 +72,15 @@ input:focus{border-color:#4f46e5}
 
 <div class="container no-select" id="app">
 
-<!-- SCREEN 1: Registration -->
 <div id="screen-reg">
   <div class="header">
     <h1>🐍 Python Fundamentals Assessment</h1>
-    <p>Variables · Data Types · Lists · Tuples · Sets · Dicts · Operators · Input · Type Conversion</p>
+    <p>Variables · Data Types · Control Flow · Loops · Lists · Tuples · Sets · Dicts · Operators</p>
   </div>
   <div class="card">
     <div class="section-title">Student Registration</div>
     <div class="warn-banner">⚠️ Once started, you cannot go back. Results are shown only after submission.</div>
-    <div class="info-banner">📋 30 MCQ + 20 Practice questions &nbsp;|&nbsp; ⏱ 60 minutes &nbsp;|&nbsp; 📊 Total: 50 marks</div>
+    <div class="info-banner">📋 60 MCQ + 40 Practice questions &nbsp;|&nbsp; ⏱ 90 minutes &nbsp;|&nbsp; 📊 Total: 100 marks</div>
     <div class="form-grid">
       <div class="full">
         <label>Full Name *</label>
@@ -102,7 +101,6 @@ input:focus{border-color:#4f46e5}
   <div style="text-align:center;font-size:0.8rem;color:#aaa;margin-top:1rem">Powered by EntryGlobe · entryglobe@gmail.com</div>
 </div>
 
-<!-- SCREEN 2: Assessment -->
 <div id="screen-assessment" class="hidden">
   <div class="header">
     <h1>🐍 Python Fundamentals Assessment</h1>
@@ -111,12 +109,12 @@ input:focus{border-color:#4f46e5}
   <div class="progress-bar"><div class="progress-fill" id="progress" style="width:0%"></div></div>
   <div class="card">
     <div class="section-title">Section A — Multiple Choice Questions</div>
-    <div><span class="badge badge-blue">30 Questions · 1 mark each</span></div>
+    <div><span class="badge badge-blue">60 Questions · 1 mark each</span></div>
     <div id="mcq-questions"></div>
   </div>
   <div class="card">
     <div class="section-title">Section B — Practice / Short Answer</div>
-    <div><span class="badge badge-amber">20 Questions · 1 mark each</span></div>
+    <div><span class="badge badge-amber">40 Questions · 1 mark each</span></div>
     <div id="practice-questions"></div>
   </div>
   <div class="card" style="text-align:center">
@@ -125,7 +123,6 @@ input:focus{border-color:#4f46e5}
   </div>
 </div>
 
-<!-- SCREEN 3: Results -->
 <div id="screen-result" class="hidden">
   <div class="header">
     <h1>📊 Assessment Results</h1>
@@ -134,7 +131,7 @@ input:focus{border-color:#4f46e5}
   <div class="card">
     <div class="score-card">
       <div class="score-big" id="final-score">0</div>
-      <div class="score-label">out of 50 marks</div>
+      <div class="score-label">out of 100 marks</div>
       <div class="score-grid">
         <div class="score-item"><div class="val" id="mcq-score-display">0</div><div class="lbl">MCQ Score</div></div>
         <div class="score-item"><div class="val" id="prac-score-display">0</div><div class="lbl">Practice Score</div></div>
@@ -186,7 +183,41 @@ const MCQ=[
   {q:"What does int(3.9) return?",opts:["4","3","3.9","Error"],ans:1,topic:"Type Conversion"},
   {q:"A dictionary key must be?",opts:["mutable","immutable","a string","a number"],ans:1,topic:"Dicts"},
   {q:"What is the output of len({'a','b','a','c'})?",opts:["4","3","2","Error"],ans:1,topic:"Sets"},
-  {q:"Which of these is a valid Python comment?",opts:["// comment","/* comment */","# comment","<!-- comment -->"],ans:2,topic:"Variables"}
+  {q:"Which of these is a valid Python comment?",opts:["// comment","/* comment */","# comment",""],ans:2,topic:"Variables"},
+  
+  // IF-ELSE MCQs (31-45)
+  {q:"Which of the following statements is used to start a conditional statement branch in Python?",opts:["if","ifelse","elif","else if"],ans:0,topic:"If-Else"},
+  {q:"What is the correct syntax for an 'else if' condition block in Python?",opts:["else if","elseif","elif","elsif"],ans:2,topic:"If-Else"},
+  {q:"What will be the output of: \nx = 5\nif x > 2:\n    print('Yes')\nelse:\n    print('No')",opts:["Yes","No","Error","None"],ans:0,topic:"If-Else"},
+  {q:"In Python, block structuring and nesting inside an if-else statement is defined by:",opts:["Braces {}","Parentheses ()","Indentation","Keywords"],ans:2,topic:"If-Else"},
+  {q:"What is the value of 'res' after running: \na = 10\nb = 20\nres = a if a > b else b",opts:["10","20","True","False"],ans:1,topic:"If-Else"},
+  {q:"What does the following block print? \nif False:\n    print('A')\nelif True:\n    print('B')\nelse:\n    print('C')",opts:["A","B","C","A and B"],ans:1,topic:"If-Else"},
+  {q:"Which token finishes the condition header line in an 'if' or 'elif' statement?",opts:[";","{",":","None of these"],ans:2,topic:"If-Else"},
+  {q:"What is the output of: \nx = 10\nif x == 10:\nprint('Equal')",opts:["Equal","SyntaxError","IndentationError","None"],ans:2,topic:"If-Else"},
+  {q:"Can you have an 'elif' block without an initial 'if' block?",opts:["Yes","No","Only in loops","Depends on data type"],ans:1,topic:"If-Else"},
+  {q:"What will the following code output? \nx = 0\nif x:\n    print('True')\nelse:\n    print('False')",opts:["True","False","0","Error"],ans:1,topic:"If-Else"},
+  {q:"Which of the following executes if all conditions in an if-elif chain evaluate to False?",opts:["The first elif block","The last elif block","The else block","None of the blocks"],ans:2,topic:"If-Else"},
+  {q:"What is the output of: \na, b = 3, 5\nif a < b or a == 3:\n    print('Win')",opts:["Win","No output","Error","False"],ans:0,topic:"If-Else"},
+  {q:"Which of these comparisons evaluates to True?",opts:["'apple' < 'banana'","5 > 10","not True","3 != 3"],ans:0,topic:"If-Else"},
+  {q:"What happens if multiple nested conditions evaluate to True in an if-elif chain?",opts:["All matching blocks execute","Only the first matching block executes","Only the last matching block executes","An error is raised"],ans:1,topic:"If-Else"},
+  {q:"What does an empty condition evaluate to if we run: if []: print('Yes') else: print('No')?",opts:["Yes","No","Error","Depends"],ans:1,topic:"If-Else"},
+
+  // LOOPS MCQs (46-60)
+  {q:"Which loop type does Python explicitly support natively?",opts:["for and while","for and do-while","while and do-while","foreach only"],ans:0,topic:"Loops"},
+  {q:"What does range(5) yield sequentially?",opts:["1, 2, 3, 4, 5","0, 1, 2, 3, 4","0, 1, 2, 3, 4, 5","1, 2, 3, 4"],ans:1,topic:"Loops"},
+  {q:"Which statement immediately terminates the loop context completely?",opts:["continue","break","pass","exit"],ans:1,topic:"Loops"},
+  {q:"Which statement is used to skip the current iteration and move to the next loop pass?",opts:["break","pass","skip","continue"],ans:3,topic:"Loops"},
+  {q:"What does range(1, 10, 3) generate?",opts:["1, 2, 3","1, 4, 7","1, 4, 7, 10","3, 6, 9"],ans:1,topic:"Loops"},
+  {q:"What is the output of: \nfor i in range(2):\n    print(i, end='')",opts:["01","12","012","2"],ans:0,topic:"Loops"},
+  {q:"An 'else' block attached directly to a 'for' loop executes when:",opts:["The loop completes normally without a break","The loop encounters a break","The loop conditions fail instantly on run","Never"],ans:0,topic:"Loops"},
+  {q:"What is the result of running this infinite loop scenario: \nwhile True:\n    break\n    print('Loop')",opts:["Prints 'Loop' infinitely","Prints 'Loop' once","Terminates without printing","SyntaxError"],ans:2,topic:"Loops"},
+  {q:"What is the output of: \ni = 5\nwhile i > 0:\n    i -= 2\nprint(i)",opts:["5","1","-1","0"],ans:2,topic:"Loops"},
+  {q:"Which keyword is a placeholder that does absolutely nothing when executed?",opts:["continue","break","pass","return"],ans:2,topic:"Loops"},
+  {q:"How many times will the statement print: \nfor x in [1, 2]:\n    for y in [3, 4]:\n        print('Hi')",opts:["2","4","6","8"],ans:1,topic:"Loops"},
+  {q:"What happens if a while condition is permanently True and has no break statement?",opts:["Runs into an infinite loop","Runs 100 times and stops","Raises an Exception","Automatically crashes instantly"],ans:0,topic:"Loops"},
+  {q:"What sequence does range(5, 2, -1) return?",opts:["5, 4, 3, 2","5, 4, 3","2, 3, 4, 5","Error"],ans:1,topic:"Loops"},
+  {q:"Which structure is best used to safely iterate directly over item collections like lists?",opts:["while loop","for...in loop","do-while loop","if-else block"],ans:1,topic:"Loops"},
+  {q:"What is the default initial step value for the range() function if omitted?",opts:["0","1","-1","None"],ans:1,topic:"Loops"}
 ];
 
 const PRACTICE=[
@@ -209,10 +240,35 @@ const PRACTICE=[
   {q:"Use the ** operator to calculate 2 to the power of 10.",topic:"Operators"},
   {q:"Create a variable price = 99.99 and print its data type.",topic:"Data Types"},
   {q:"Write code to convert a list [1,2,3] into a tuple.",topic:"Type Conversion"},
-  {q:"Print all keys of the dictionary d = {'x':10,'y':20,'z':30}.",topic:"Dicts"}
+  {q:"Print all keys of the dictionary d = {'x':10,'y':20,'z':30}.",topic:"Dicts"},
+
+  // IF-ELSE PRACTICE (21-30)
+  {q:"Write an if statement that prints 'Positive' if variable x is greater than 0.",topic:"If-Else"},
+  {q:"Write code using if-else to check if a number variable num is even or odd.",topic:"If-Else"},
+  {q:"Write code checking if score is >= 90 print 'A', elif >= 80 print 'B', else print 'C'.",topic:"If-Else"},
+  {q:"Use shorthand ternary format to assign 'Pass' to status if grade >= 40 else 'Fail'.",topic:"If-Else"},
+  {q:"Write an if condition to check if the item 'apple' exists in the list choice = ['banana', 'apple'].",topic:"If-Else"},
+  {q:"Write code checking if a string user_input is completely empty. Print 'Empty' if so.",topic:"If-Else"},
+  {q:"Demonstrate a nested if block: check if year is divisible by 4, and inside check if it is divisible by 100.",topic:"If-Else"},
+  {q:"Write a block using logical 'and' to print 'Valid' if age is >= 18 and registration status is True.",topic:"If-Else"},
+  {q:"Show an example where using bool(val) evaluates to False inside an if block conditional expression.",topic:"If-Else"},
+  {q:"Write an if condition block validating if a given number 'n' falls within the range between 10 and 50 inclusive.",topic:"If-Else"},
+
+  // LOOPS PRACTICE (31-40)
+  {q:"Write a for loop that loops through range(1, 6) and prints each item.",topic:"Loops"},
+  {q:"Write a while loop that prints numbers from 1 up to 5.",topic:"Loops"},
+  {q:"Write a loop that loops over characters in the string 'PYTHON' and prints each capital letter.",topic:"Loops"},
+  {q:"Write a loop over items in [10, 20, 30] and print each value multiplied by 2.",topic:"Loops"},
+  {q:"Use a break statement in a loop range(10) to stop the loop when the index reaches 5.",topic:"Loops"},
+  {q:"Use a continue statement in a loop range(5) to skip printing the target index 3.",topic:"Loops"},
+  {q:"Write a while loop that runs as long as count is less than 3, decrementing or incrementing as necessary.",topic:"Loops"},
+  {q:"Show how to use range() to produce a loop counting down from 5 to 1.",topic:"Loops"},
+  {q:"Write code calculating the sum total of numbers from 1 to 5 using any loop style.",topic:"Loops"},
+  {q:"Demonstrate how an 'else' block behaves on a finished loop using a short print statement.",topic:"Loops"}
 ];
 
-let studentData={},timerInterval,timeLeft=3600,startTimestamp;
+// TIMER CONFIGURATION FOR 90 MINUTES (5400 SECONDS)
+let studentData={},timerInterval,timeLeft=5400,startTimestamp;
 
 function startAssessment(){
   const name=document.getElementById('reg-name').value.trim();
@@ -232,7 +288,7 @@ function renderMCQ(){
   document.getElementById('mcq-questions').innerHTML=MCQ.map((q,i)=>`
     <div class="q-block">
       <div class="q-num"><span class="badge badge-blue">Q${i+1}</span> <span style="font-size:0.78rem;color:#aaa">${q.topic}</span></div>
-      <div class="q-text">${q.q}</div>
+      <div class="q-text">${q.q.replace(/\n/g, '<br>').replace(/ /g, '&nbsp;')}</div>
       <div class="options">${q.opts.map((o,j)=>`
         <label class="opt" id="opt-${i}-${j}">
           <input type="radio" name="mcq-${i}" value="${j}" onchange="selectOpt(${i},${j})"> ${String.fromCharCode(65+j)}. ${o}
@@ -258,11 +314,12 @@ function updateProgress(){
   let a=0;
   MCQ.forEach((_,i)=>{if(document.querySelector(`input[name="mcq-${i}"]:checked`))a++;});
   PRACTICE.forEach((_,i)=>{const t=document.getElementById(`prac-${i}`);if(t&&t.value.trim())a++;});
-  document.getElementById('progress').style.width=Math.round((a/50)*100)+'%';
+  document.getElementById('progress').style.width=Math.round((a/100)*100)+'%';
 }
 
 function startTimer(){
   const el=document.getElementById('timer');el.classList.remove('hidden');
+  el.textContent=`⏱ 90:00`;
   timerInterval=setInterval(()=>{
     timeLeft--;
     if(timeLeft<=0){clearInterval(timerInterval);alert('Time is up! Submitting now.');submitAssessment();return;}
@@ -298,10 +355,10 @@ async function submitAssessment(){
   const total=mcqScore+pracScore;
   const timeTaken=getTimeTaken();
   let grade,msg;
-  if(total>=45){grade='A+';msg='Outstanding! Excellent understanding of Python fundamentals 🎉'}
-  else if(total>=40){grade='A';msg='Great job! Strong command over the topics 👏'}
-  else if(total>=35){grade='B';msg='Good work! Review the topics you missed 📚'}
-  else if(total>=25){grade='C';msg='Fair attempt. More practice needed 💪'}
+  if(total>=90){grade='A+';msg='Outstanding! Excellent understanding of Python fundamentals 🎉'}
+  else if(total>=80){grade='A';msg='Great job! Strong command over the topics 👏'}
+  else if(total>=70){grade='B';msg='Good work! Review the topics you missed 📚'}
+  else if(total>=50){grade='C';msg='Fair attempt. More practice needed 💪'}
   else{grade='D';msg='Keep practicing! Revisit fundamentals and try again 🔄'}
 
   document.getElementById('screen-assessment').classList.add('hidden');
@@ -324,8 +381,8 @@ async function submitAssessment(){
   document.getElementById('screen-result').classList.remove('hidden');
   document.getElementById('result-student-info').textContent=`${studentData.name} · ${studentData.email} · ${studentData.phone}`;
   document.getElementById('final-score').textContent=total;
-  document.getElementById('mcq-score-display').textContent=`${mcqScore}/30`;
-  document.getElementById('prac-score-display').textContent=`${pracScore}/20`;
+  document.getElementById('mcq-score-display').textContent=`${mcqScore}/60`;
+  document.getElementById('prac-score-display').textContent=`${pracScore}/40`;
   document.getElementById('grade-display').textContent=grade;
   document.getElementById('grade-msg').textContent=msg;
   document.getElementById('saved-badge').classList.remove('hidden');
@@ -333,7 +390,7 @@ async function submitAssessment(){
   document.getElementById('mcq-review').innerHTML=mcqResults.map((r,i)=>`
     <div class="q-block" style="border-left:3px solid ${r.correct?'#22c55e':'#ef4444'}">
       <div class="q-num"><span class="badge ${r.correct?'badge-green':'badge-blue'}">Q${i+1}</span> ${r.topic}</div>
-      <div class="q-text">${r.q}</div>
+      <div class="q-text">${r.q.replace(/\n/g, '<br>').replace(/ /g, '&nbsp;')}</div>
       <div style="margin-top:8px;font-size:0.85rem">
         ${r.chosen>=0?`<span class="${r.correct?'correct-ans':'wrong-ans'}">Your answer: ${String.fromCharCode(65+r.chosen)}. ${r.opts[r.chosen]}</span>`:'<span class="wrong-ans">Not attempted</span>'}
         ${!r.correct?`<div class="ans-reveal">✓ Correct: ${String.fromCharCode(65+r.ans)}. ${r.opts[r.ans]}</div>`:''}
