@@ -64,7 +64,7 @@ input:focus{border-color:#4f46e5}
 </style>
 </head>
 <body>
-<div class="timer hidden" id="timer">⏱ 90:00</div>
+<div class="timer hidden" id="timer">⏱ 100:00</div>
 <div class="saving-overlay hidden" id="saving-overlay">
   <div class="spinner"></div>
   <div id="saving-msg" style="font-size:1rem;color:#4f46e5;font-weight:500">Saving your results...</div>
@@ -75,12 +75,12 @@ input:focus{border-color:#4f46e5}
 <div id="screen-reg">
   <div class="header">
     <h1>🐍 Python Fundamentals Assessment</h1>
-    <p>Variables · Data Types · Control Flow · Loops · Lists · Tuples · Sets · Dicts · Operators</p>
+    <p>Variables · Data Types · Control Flow · Loops · Functions (def, lambda, recursion, args/kwargs) · Built-ins · Collections</p>
   </div>
   <div class="card">
     <div class="section-title">Student Registration</div>
     <div class="warn-banner">⚠️ Once started, you cannot go back. Results are shown only after submission.</div>
-    <div class="info-banner">📋 60 MCQ + 40 Practice questions &nbsp;|&nbsp; ⏱ 90 minutes &nbsp;|&nbsp; 📊 Total: 100 marks</div>
+    <div class="info-banner">📋 80 MCQ + 40 Practice questions &nbsp;|&nbsp; ⏱ 100 minutes &nbsp;|&nbsp; 📊 Total: 120 marks</div>
     <div class="form-grid">
       <div class="full">
         <label>Full Name *</label>
@@ -109,7 +109,7 @@ input:focus{border-color:#4f46e5}
   <div class="progress-bar"><div class="progress-fill" id="progress" style="width:0%"></div></div>
   <div class="card">
     <div class="section-title">Section A — Multiple Choice Questions</div>
-    <div><span class="badge badge-blue">60 Questions · 1 mark each</span></div>
+    <div><span class="badge badge-blue">80 Questions · 1 mark each</span></div>
     <div id="mcq-questions"></div>
   </div>
   <div class="card">
@@ -131,7 +131,7 @@ input:focus{border-color:#4f46e5}
   <div class="card">
     <div class="score-card">
       <div class="score-big" id="final-score">0</div>
-      <div class="score-label">out of 100 marks</div>
+      <div class="score-label">out of 120 marks</div>
       <div class="score-grid">
         <div class="score-item"><div class="val" id="mcq-score-display">0</div><div class="lbl">MCQ Score</div></div>
         <div class="score-item"><div class="val" id="prac-score-display">0</div><div class="lbl">Practice Score</div></div>
@@ -217,7 +217,29 @@ const MCQ=[
   {q:"What happens if a while condition is permanently True and has no break statement?",opts:["Runs into an infinite loop","Runs 100 times and stops","Raises an Exception","Automatically crashes instantly"],ans:0,topic:"Loops"},
   {q:"What sequence does range(5, 2, -1) return?",opts:["5, 4, 3, 2","5, 4, 3","2, 3, 4, 5","Error"],ans:1,topic:"Loops"},
   {q:"Which structure is best used to safely iterate directly over item collections like lists?",opts:["while loop","for...in loop","do-while loop","if-else block"],ans:1,topic:"Loops"},
-  {q:"What is the default initial step value for the range() function if omitted?",opts:["0","1","-1","None"],ans:1,topic:"Loops"}
+  {q:"What is the default initial step value for the range() function if omitted?",opts:["0","1","-1","None"],ans:1,topic:"Loops"},
+
+  // FUNCTIONS MCQs (61-80)
+  {q:"Which keyword is used to define a standard named function in Python?",opts:["func","function","def","lambda"],ans:2,topic:"Functions"},
+  {q:"What is a lambda function in Python?",opts:["A recursive function","An anonymous single-expression function","A function containing global keys","A method inside standard classes"],ans:1,topic:"Functions"},
+  {q:"What parameter declaration format captures an arbitrary number of positional arguments into a tuple?",opts:["*args","**kwargs","*","&args"],ans:0,topic:"Functions"},
+  {q:"What type of object is generated inside a function context when parameter **kwargs is specified?",opts:["List","Tuple","Set","Dictionary"],ans:3,topic:"Functions"},
+  {q:"What feature defines a recursive function concept?",opts:["It loops over item iterators","It calls itself to solve smaller sub-problems","It processes key-value structures","It executes inline inside lambda statements"],ans:1,topic:"Functions"},
+  {q:"What will occur if a recursive function misses its explicit terminal base case scenario?",opts:["Returns None cleanly","Raises an IndentationError","Triggers a RecursionError (Maximum depth exceeded)","Stops loop execution safely"],ans:2,topic:"Functions"},
+  {q:"What is the value of: (lambda a, b: a * b)(3, 4)?",opts:["7","12","34","SyntaxError"],ans:1,topic:"Functions"},
+  {q:"Which of the following represents a Python pre-built functional utility?",opts:["print()","def","while","if"],ans:0,topic:"Functions"},
+  {q:"What does a functional block return explicitly if it reaches completion without a return expression statement?",opts:["0","False","None","An empty string"],ans:2,topic:"Functions"},
+  {q:"What output is yielded from evaluating: abs(-15)?",opts:["-15","15","0","Error"],ans:1,topic:"Functions"},
+  {q:"What is the output of the following code?\ndef test(a, b=5):\n    return a + b\nprint(test(3))",opts:["8","3","5","Error"],ans:0,topic:"Functions"},
+  {q:"Can a lambda function contain multiple individual statements separated by newlines?",opts:["Yes","No","Only inside loops","Only if it returns a list"],ans:1,topic:"Functions"},
+  {q:"What does the built-in max(['a', 'b', 'c']) return?",opts:["a","b","c","Error"],ans:2,topic:"Functions"},
+  {q:"How do you call a function named 'calculate' that takes *args with values 1, 2, 3?",opts:["calculate(1, 2, 3)","calculate([1, 2, 3])","calculate(*(1, 2, 3))","Both A and C are correct"],ans:3,topic:"Functions"},
+  {q:"What is the result of len(str(bin(10)))?",opts:["6","7","5","4"],ans:0,topic:"Functions"},
+  {q:"In a function definition, what is the correct sequence of parameters?",opts:["*args, positional, **kwargs","positional, *args, **kwargs","**kwargs, *args, positional","positional, **kwargs, *args"],ans:1,topic:"Functions"},
+  {q:"What is the output of the built-in function pow(2, 3, 5)?",opts:["8","3","2","0"],ans:1,topic:"Functions"},
+  {q:"Which of the following built-in functions returns an iterator?",opts:["len()","map()","sorted()","sum()"],ans:1,topic:"Functions"},
+  {q:"What will happen when you pass a dictionary to a function expecting **kwargs using **mydict?",opts:["It unpacks keys as keyword arguments","It passes the whole dictionary as a single positional tuple","It causes a SyntaxError","It converts the dict to a set"],ans:0,topic:"Functions"},
+  {q:"Which function is used to dynamically evaluate a string containing code expression?",opts:["exec()","eval()","run()","parse()"],ans:1,topic:"Functions"}
 ];
 
 const PRACTICE=[
@@ -264,11 +286,23 @@ const PRACTICE=[
   {q:"Write a while loop that runs as long as count is less than 3, decrementing or incrementing as necessary.",topic:"Loops"},
   {q:"Show how to use range() to produce a loop counting down from 5 to 1.",topic:"Loops"},
   {q:"Write code calculating the sum total of numbers from 1 to 5 using any loop style.",topic:"Loops"},
-  {q:"Demonstrate how an 'else' block behaves on a finished loop using a short print statement.",topic:"Loops"}
+  {q:"Demonstrate how an 'else' block behaves on a finished loop using a short print statement.",topic:"Loops"},
+
+  // NEW FUNCTIONS PRACTICE (41-50)
+  {q:"Write a function using def named 'greet' that takes a name parameter and returns 'Hello ' + name.",topic:"Functions"},
+  {q:"Create a single line lambda function that accepts an argument x and returns its squared value.",topic:"Functions"},
+  {q:"Define a function named 'add_all' that uses *args to accept any number of values and returns their total sum.",topic:"Functions"},
+  {q:"Write a custom function display_info(**kwargs) that prints out each key-value pair received inside the arguments.",topic:"Functions"},
+  {q:"Write a tiny recursive tracking function named 'countdown(n)' that prints n and calls itself with n-1 until n drops to 0.",topic:"Functions"},
+  {q:"Explain or code the explicit base case required to terminate a recursive factorials application tracking loop safely.",topic:"Functions"},
+  {q:"Show how to use the built-in min() and max() utilities to discover edge elements within list targets like [14, 5, 23].",topic:"Functions"},
+  {q:"Use the pre-built round() function sequence to truncate the number 4.6782 down to precisely two decimal positions.",topic:"Functions"},
+  {q:"Write a functional architecture pattern configuring default parameter bindings: def power(base, exponent=2): returning calculation results.",topic:"Functions"},
+  {q:"Demonstrate capturing functional operations inside tracking variables: mapping target closures like absolute = abs and evaluating absolute(-9).",topic:"Functions"}
 ];
 
-// TIMER CONFIGURATION FOR 90 MINUTES (5400 SECONDS)
-let studentData={},timerInterval,timeLeft=5400,startTimestamp;
+// TIMER CONFIGURATION FOR 100 MINUTES (6000 SECONDS)
+let studentData={},timerInterval,timeLeft=6000,startTimestamp;
 
 function startAssessment(){
   const name=document.getElementById('reg-name').value.trim();
@@ -314,12 +348,12 @@ function updateProgress(){
   let a=0;
   MCQ.forEach((_,i)=>{if(document.querySelector(`input[name="mcq-${i}"]:checked`))a++;});
   PRACTICE.forEach((_,i)=>{const t=document.getElementById(`prac-${i}`);if(t&&t.value.trim())a++;});
-  document.getElementById('progress').style.width=Math.round((a/100)*100)+'%';
+  document.getElementById('progress').style.width=Math.round((a/120)*100)+'%';
 }
 
 function startTimer(){
   const el=document.getElementById('timer');el.classList.remove('hidden');
-  el.textContent=`⏱ 90:00`;
+  el.textContent=`⏱ 100:00`;
   timerInterval=setInterval(()=>{
     timeLeft--;
     if(timeLeft<=0){clearInterval(timerInterval);alert('Time is up! Submitting now.');submitAssessment();return;}
@@ -355,10 +389,10 @@ async function submitAssessment(){
   const total=mcqScore+pracScore;
   const timeTaken=getTimeTaken();
   let grade,msg;
-  if(total>=90){grade='A+';msg='Outstanding! Excellent understanding of Python fundamentals 🎉'}
-  else if(total>=80){grade='A';msg='Great job! Strong command over the topics 👏'}
-  else if(total>=70){grade='B';msg='Good work! Review the topics you missed 📚'}
-  else if(total>=50){grade='C';msg='Fair attempt. More practice needed 💪'}
+  if(total>=108){grade='A+';msg='Outstanding! Excellent understanding of Python fundamentals 🎉'}
+  else if(total>=96){grade='A';msg='Great job! Strong command over the topics 👏'}
+  else if(total>=84){grade='B';msg='Good work! Review the topics you missed 📚'}
+  else if(total>=60){grade='C';msg='Fair attempt. More practice needed 💪'}
   else{grade='D';msg='Keep practicing! Revisit fundamentals and try again 🔄'}
 
   document.getElementById('screen-assessment').classList.add('hidden');
@@ -381,7 +415,7 @@ async function submitAssessment(){
   document.getElementById('screen-result').classList.remove('hidden');
   document.getElementById('result-student-info').textContent=`${studentData.name} · ${studentData.email} · ${studentData.phone}`;
   document.getElementById('final-score').textContent=total;
-  document.getElementById('mcq-score-display').textContent=`${mcqScore}/60`;
+  document.getElementById('mcq-score-display').textContent=`${mcqScore}/80`;
   document.getElementById('prac-score-display').textContent=`${pracScore}/40`;
   document.getElementById('grade-display').textContent=grade;
   document.getElementById('grade-msg').textContent=msg;
